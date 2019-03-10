@@ -1,0 +1,28 @@
+<div class="row mb-2 city-apartment">
+  <div class="col-md-3 img-apartment">
+    <img src="{{item.img}}" alt="{{item.address.city}}" />
+  </div>
+  <div class="col-md-5">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="ap-address"><i class="fas fa-map-marker-alt pr-2"></i>{{item.address.streetName}} -
+          {{item.address.streetNumber}}</p>
+        <span class="fa fa-star checked" *ngFor="let j of i(item.starRate)"></span>
+      </div>
+      <div class="ap-description">
+        {{item.description}}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 text-right">
+    <p class="text-rate">
+      Very good
+    </p>
+    <p class="nm-reviews">
+      {{item.review.length}} reviews
+    </p>
+    <div class="rate-value">
+      {{item.avgRate}}
+    </div>
+  </div>
+</div>

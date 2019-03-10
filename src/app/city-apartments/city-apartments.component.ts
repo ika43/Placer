@@ -18,24 +18,6 @@ export class CityApartmentsComponent implements OnInit {
     private ngRedux: NgRedux<IApartmentState>
   ) { }
 
-  // * initialize search form
-  form = new FormGroup({
-    'dateRange': new FormControl(),
-    'destination': new FormControl(),
-    'person': new FormControl()
-  })
-
-  // * getter
-  get dateRange() {
-    return this.form.get('dateRange');
-  }
-
-  getValues(){
-    console.log("VALUE", this.dateRange.value);
-  }
-
-
-
   apartments;
   properties;
   currentCity;
@@ -44,10 +26,53 @@ export class CityApartmentsComponent implements OnInit {
   i = Array;
   public start: Date;
   public end: Date;
+  testing
 
-  getDates() {
-    console.log("DATE")
+  // * initialize search form
+  form = new FormGroup({
+    'dateRange': new FormControl(),
+    'destination': new FormControl(),
+    'person': new FormControl()
+  })
+
+  //onChange(val) {
+  //  this.apartments.map(a => {
+  //    a.properties.map(p => {
+  //      if (p.name === val) {
+  //        console.log("USAO", p.name)
+  //        this.result.push(a)
+  //      }
+  //    })
+  //  })
+  //}
+
+  submitFilter(val) {
+    console.log(val);
   }
+
+
+  // * getter
+  get dateRange() {
+    return this.form.get('dateRange');
+  }
+
+  get destination() {
+    return this.form.get('destination');
+  }
+
+  get person() {
+    return this.form.get('person');
+  }
+
+  // * ON SUBMIT FORM
+
+  submitSearch() {
+    console.log("VALUES", this.dateRange.value)
+    console.log("VALUES", this.destination.value)
+    console.log("VALUES", this.person.value)
+  }
+
+
 
   ngOnInit() {
     console.log("COMPONENT INIT:  CITY_APARTMENT")

@@ -13,16 +13,14 @@
   <div class="row mt-3">
     <div class="col-md-2 offset-md-1">
       <div class="side-search mb-2">
-        <form [formGroup]='form'>
+        <form [formGroup]='form' (submit)="submitSearch()">
           <h3>Search</h3>
           <label for="sc-city" class="mb-0 fs-14">Destination/city name:</label>
           <input type="text" formControlName="destination" class="sb-search" />
           <label for="sc-city" class="mb-0 fs-14">Check-in date:</label>
           <!-- <input type="text" name="cu-date" class="sb-search" /> -->
-          <ejs-daterangepicker placeholder='Select a range' formControlName='dateRange' (blur)="getValues()">
+          <ejs-daterangepicker placeholder='Select a range' formControlName='dateRange'>
           </ejs-daterangepicker>
-          <label for="sc-city" class="mb-0 fs-14">Check-out date:</label>
-          <input type="text" name="ci-date" class="sb-search" />
           <label for="sc-person" class="mb-0 fs-14">Person</label>
           <input type="text" formControlName="person" class="sb-search" />
           <button type="submit" class="btn btn-primary mt-2">
@@ -34,9 +32,12 @@
         <h4 class="pb-2 display-5">Filter by:</h4>
 
         <p>Properties</p>
-        <div class="checkbox" *ngFor="let p of properties">
-          <input type="checkbox" name="{{p.name}}" value="{{p._id}}"><small class="pl-2">{{p.name}}</small>
-        </div>
+        <form #propForm="ngForm" (submit)="submitFilter(propForm)">
+          <div class="checkbox" *ngFor="let p of properties">
+            <input type="checkbox" name={{p.name}} ([ngModel])="testing"><small class="pl-2">{{p.name}}</small>
+          </div>
+          <input type="submit" value="DOne" />
+        </form>
         <hr />
         <p>Star rating</p>
         <div class="checkbox">
@@ -77,34 +78,36 @@
           <button type="button" class="w-25 ap-btn last-btn">Top reviewed</button>
         </div>
       </div>
-      <div class="row mb-2 city-apartment" *ngFor="let apartment of result">
-        <div class="col-md-3 img-apartment">
-          <img src="{{apartment.img}}" alt="{{apartment.address.city}}" />
-        </div>
-        <div class="col-md-5">
-          <div class="row">
-            <div class="col-md-12">
-              <p class="ap-address"><i class="fas fa-map-marker-alt pr-2"></i>{{apartment.address.streetName}} -
-                {{apartment.address.streetNumber}}</p>
-              <span class="fa fa-star checked" *ngFor="let j of i(apartment.starRate)"></span>
-            </div>
-            <div class="ap-description">
-              {{apartment.description}}
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 text-right">
-          <p class="text-rate">
-            Very good
-          </p>
-          <p class="nm-reviews">
-            {{apartment.review.length}} reviews
-          </p>
-          <div class="rate-value">
-            {{apartment.avgRate}}
-          </div>
-        </div>
-      </div>
+      <app-apartment *ngFor="let apartment of result" [item]='apartment'>
+      </app-apartment>
+      <!-- <div class="row mb-2 city-apartment" *ngFor="let apartment of result"> -->
+      <!-- <div class="col-md-3 img-apartment"> -->
+      <!-- <img src="{{apartment.img}}" alt="{{apartment.address.city}}" /> -->
+      <!-- </div> -->
+      <!-- <div class="col-md-5"> -->
+      <!-- <div class="row"> -->
+      <!-- <div class="col-md-12"> -->
+      <!-- <p class="ap-address"><i class="fas fa-map-marker-alt pr-2"></i>{{apartment.address.streetName}} - -->
+      <!-- {{apartment.address.streetNumber}}</p> -->
+      <!-- <span class="fa fa-star checked" *ngFor="let j of i(apartment.starRate)"></span> -->
+      <!-- </div> -->
+      <!-- <div class="ap-description"> -->
+      <!-- {{apartment.description}} -->
+      <!-- </div> -->
+      <!-- </div> -->
+      <!-- </div> -->
+      <!-- <div class="col-md-4 text-right"> -->
+      <!-- <p class="text-rate"> -->
+      <!-- Very good -->
+      <!-- </p> -->
+      <!-- <p class="nm-reviews"> -->
+      <!-- {{apartment.review.length}} reviews -->
+      <!-- </p> -->
+      <!-- <div class="rate-value"> -->
+      <!-- {{apartment.avgRate}} -->
+      <!-- </div> -->
+      <!-- </div> -->
+      <!-- </div> -->
     </div>
   </div>
   <div class="row">

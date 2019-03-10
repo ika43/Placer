@@ -4,7 +4,7 @@ import { NgModule, isDevMode } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PostComponent } from './post/post.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { TradeComponent } from './trade/trade.component';
@@ -27,6 +27,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeService } from './home/home.service';
 import { CityApartmentsComponent } from './city-apartments/city-apartments.component';
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { ApartmentComponent } from './apartment/apartment.component';
 
 @NgModule({
   declarations: [
@@ -40,12 +41,14 @@ import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
     ConfirmcodeComponent,
     LoaderComponent,
     CityApartmentsComponent,
-    CityApartmentsComponent
+    CityApartmentsComponent,
+    ApartmentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     NgReduxModule,
     BrowserAnimationsModule,
