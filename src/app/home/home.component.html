@@ -2,7 +2,7 @@
   <div class="container h-100">
     <div class="row align-items-center h-100">
       <div class="col-10 mx-auto">
-        <p>A home from home; choose the apartment that appeals to you the most.</p>
+        <p class="disable-user-select">A home from home; choose the apartment that appeals to you the most.</p>
         <div>
           <input type="text" class="home-search" placeholder="More places then you could ever go!" />
           <input type="text" class="home-search-right" />
@@ -15,26 +15,18 @@
 
 </div>
 <div class="container mt-3">
-  <p class="home-popular">Most popular cities</p>
+  <p class="home-popular disable-user-select">Most popular cities</p>
   <div class="row" *ngIf="loading">
-    <div class="col-md-3" *ngFor="let item of recommendedCities">
-      <div class="card">
-        <img class="card-img-top" src={{item.img}} alt="Card image cap">
-        <div class="card-body">
-          <h4 class="card-title mb-3">
-            <a routerLink="/apartments/city/{{item.name}}" [queryParams]="{ page: 0 }">
-              {{item.name}} ({{item.number}})
-            </a>
-          </h4>
-        </div>
-      </div>
-    </div>
+    <app-card class="col-md-3" *ngFor="let item of recommendedCities" [item]="item"></app-card>
   </div>
 </div>
 <div class="container">
   <div class="row">
-    <p class="home-popular">
+    <p class="home-popular disable-user-select">
       MOST POPULAR APARTMENTS IN BELGRADE
     </p>
+    <div class="row" *ngIf="loading">
+      <app-card-apartment class="col-md-3" *ngFor="let item of recommendedApartmentsInBelgrade" [item]="item"></app-card-apartment>
+    </div>
   </div>
 </div>

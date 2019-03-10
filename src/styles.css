@@ -114,3 +114,7 @@
     transform: rotate(-360deg) translateX(12px);
   }
   }
+
+  .disable-user-select {
+    user-select: none;
+  }

@@ -71,10 +71,10 @@
       <div class="row">
         <h4>{{currentCity}}: {{apartments.length}} apartments found</h4>
         <div class="ap-header">
-          <button type="button" class="w-25 ap-btn">Our top picks</button>
-          <button type="button" class="w-25 ap-btn">Price(lowest first)</button>
-          <button type="button" class="w-25 ap-btn">Stars</button>
-          <button type="button" class="w-25 ap-btn last-btn">Top reviewed</button>
+          <button type="button" class="w-25 ap-btn disable-user-select">Our top picks</button>
+          <button type="button" class="w-25 ap-btn disable-user-select">Price(lowest first)</button>
+          <button type="button" class="w-25 ap-btn disable-user-select">Stars</button>
+          <button type="button" class="w-25 ap-btn disable-user-select last-btn">Top reviewed</button>
         </div>
       </div>
       <div class="row mb-2 city-apartment" *ngFor="let apartment of result">

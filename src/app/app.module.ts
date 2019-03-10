@@ -27,6 +27,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeService } from './home/home.service';
 import { CityApartmentsComponent } from './city-apartments/city-apartments.component';
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { CardComponent } from './card/card.component';
+import { CardApartmentComponent } from './card-apartment/card-apartment.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
     ConfirmcodeComponent,
     LoaderComponent,
     CityApartmentsComponent,
-    CityApartmentsComponent
+    CityApartmentsComponent,
+    CardComponent,
+    CardApartmentComponent
   ],
   imports: [
     BrowserModule,

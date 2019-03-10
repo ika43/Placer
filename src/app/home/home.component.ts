@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
 
   apartments: [];
   recommendedCities;
+  recommendedApartmentsInBelgrade;
   loading: Boolean;
 
   ngOnInit() {
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
         this.apartments = apartmentStore.apartments;
         this.loading = apartmentStore.loaded;
         this.recommendedCities = await this.homeService.getMostPopularCities(this.apartments);
+        this.recommendedApartmentsInBelgrade = await this.homeService.getMostPopularApartmentsInBelgrade(this.apartments);
         //this.recommendedCities.map(item => {
         //  console.log("item", item)
         //})

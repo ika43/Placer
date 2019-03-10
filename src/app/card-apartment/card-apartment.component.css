@@ -1,0 +1,11 @@
+.card-img-top {
+  height: 200px;
+}
+
+.card-body {
+  height: 200px;
+}
+
+.card-description {
+  font-size: 14px
+}
