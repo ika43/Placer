@@ -2,22 +2,47 @@
   <div class="container h-100">
     <div class="row align-items-center h-100">
       <div class="col-10 mx-auto">
-        <p class="disable-user-select">A home from home; choose the apartment that appeals to you the most.</p>
-        <div>
-          <input type="text" class="home-search" placeholder="More places then you could ever go!" />
-          <input type="text" class="home-search-right" />
-          <input type="text" class="home-search-right" />
-          <button class="home-src-button">Search</button>
-        </div>
+        <p class="disable-user-select">
+          A home from home; choose the apartment that appeals to you the most.
+        </p>
+        <form [formGroup]="searchForm" (submit)="submitSearch()">
+          <div style="display: flex;">
+            <input
+              type="text"
+              class="home-search"
+              formControlName="location"
+              placeholder="More places then you could ever go!"
+            />
+            <div class="home-search-right">
+              <ejs-daterangepicker
+                placeholder="Select a range"
+                formControlName="dateRange"
+              >
+              </ejs-daterangepicker>
+            </div>
+            <input
+              placeholder="Adults"
+              min="1"
+              max="3"
+              type="number"
+              class="home-search-right"
+              formControlName="numberOfVisitors"
+            />
+            <button type="submit" class="home-src-button">Search</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-
 </div>
 <div class="container mt-3">
   <p class="home-popular disable-user-select">Most popular cities</p>
   <div class="row" *ngIf="loading">
-    <app-card class="col-md-3" *ngFor="let item of recommendedCities" [item]="item"></app-card>
+    <app-card
+      class="col-md-3"
+      *ngFor="let item of recommendedCities"
+      [item]="item"
+    ></app-card>
   </div>
 </div>
 <div class="container">
@@ -26,7 +51,11 @@
       MOST POPULAR APARTMENTS IN BELGRADE
     </p>
     <div class="row" *ngIf="loading">
-      <app-card-apartment class="col-md-3" *ngFor="let item of recommendedApartmentsInBelgrade" [item]="item"></app-card-apartment>
+      <app-card-apartment
+        class="col-md-3"
+        *ngFor="let item of recommendedApartmentsInBelgrade"
+        [item]="item"
+      ></app-card-apartment>
     </div>
   </div>
 </div>

@@ -45,3 +45,12 @@
   border-bottom: 3px solid #febb02;
   background-color: #138496;
 }
+
+.e-input-group {
+  height: 100%;
+  background-color: white;
+}
+
+.e-input-group:active {
+  border-bottom: 1px solid white;
+}
