@@ -1,0 +1,159 @@
+<!-- <form [formGroup]="form" (ngSubmit)="register()">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-header">
+            <strong>Register 🔥</strong>
+          </div>
+          <div class="card-body card-block">
+            <div class="form-group">
+              <label for="rg-name" class=" form-control-label">Firstname</label>
+              <input type="text" formControlName="rg-name" placeholder="Enter your firstname" class="form-control">
+              <span *ngIf="name.touched && name.invalid" class="error">
+                <p *ngIf="name.errors.pattern" class="m-0">❌ Invalid name</p>
+                <p *ngIf="name.errors.minlength" class="m-0">❌ Minimum two letter</p>
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="rg-surname" class=" form-control-label">Lastname</label>
+              <input type="text" formControlName="rg-surname" placeholder="Enter your lastname" class="form-control">
+              <span *ngIf="surname.touched && surname.invalid" class="error">
+                <p *ngIf="surname.errors.pattern" class="m-0">❌ Invalid name </p>
+                <p *ngIf="surname.errors.minlength" class="m-0">❌ Minimum two letter</p>
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="rg-email" class=" form-control-label">Email</label>
+              <input type="text" formControlName="rg-email" placeholder="Enter your email" class="form-control" (blur)="checkEmail()">
+              <span *ngIf="email.touched && email.invalid">
+                <p *ngIf="email.errors.email">❌ Invalid email address</p>
+                <p *ngIf="email.errors.exist">❌ Account with this email already exist.</p>
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="rg-password" class=" form-control-label">Password</label>
+              <input type="password" formControlName="rg-password" placeholder="Enter your password" class="form-control">
+              <span *ngIf="password.touched && password.invalid" class="error">
+                <p *ngIf="password.errors.pattern" class="m-0">❌ 8 characters with at least 1 Upper Case, 1 lower case,
+                  and 1 numeric character</p>
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="rg-country" class=" form-control-label">Country</label>
+              <select class="form-control" formControlName="rg-country">
+                <option *ngFor="let item of countries" value="{{item.value}}">{{item.name}}</option>
+              </select>
+              <span *ngIf="country.touched && country.invalid">
+                <p>❌ Pick a country</p>
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="rg-city" class=" form-control-label">City</label>
+              <input type="text" formControlName="rg-city" placeholder="Enter your city" class="form-control">
+              <span *ngIf="city.touched && city.invalid" class="error">
+                <p *ngIf="city.errors.pattern" class="m-0">❌ Invalid city name</p>
+                <p *ngIf="city.errors.minlength" class="m-0">❌ Minimum two letter</p>
+              </span>
+            </div>
+            <ng-template [ngIf]="!isLoading" [ngIfElse]="loading">
+              <button type="submit" class="btn btn-info btn-block">
+                Register
+              </button>
+            </ng-template>
+
+            <ng-template #loading>
+              <div class="page-loader">
+                <div class="loader">
+                  <span class="dot dot_1"></span>
+                  <span class="dot dot_2"></span>
+                  <span class="dot dot_3"></span>
+                  <span class="dot dot_4"></span>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form> -->
+<div class="container">
+  <div class="login-wrap">
+    <div class="login-content">
+      <div class="login-logo">
+        <a href="#">
+          <img src="../../assets/Images/logo.png" alt="finder">
+        </a>
+      </div>
+      <div class="login-form">
+        <form [formGroup]="form" (ngSubmit)="register()">
+          <div class="form-group">
+            <label for="rg-name" class=" form-control-label">Firstname</label>
+            <input type="text" formControlName="rg-name" placeholder="Enter your firstname"
+              class="au-input au-input--full">
+            <span *ngIf="name.touched && name.invalid" class="error">
+              <p *ngIf="name.errors.pattern" class="m-0">Invalid firstname</p>
+              <p *ngIf="name.errors.minlength" class="m-0">Minimum two letter</p>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="rg-surname" class=" form-control-label">Lastname</label>
+            <input type="text" formControlName="rg-surname" placeholder="Enter your lastname"
+              class="au-input au-input--full">
+            <span *ngIf="surname.touched && surname.invalid" class="error">
+              <p *ngIf="surname.errors.pattern" class="m-0">Invalid lastname</p>
+              <p *ngIf="surname.errors.minlength" class="m-0">Minimum two letter</p>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="rg-email" class=" form-control-label">Email</label>
+            <input type="text" formControlName="rg-email" placeholder="Enter your email" class="au-input au-input--full"
+              (blur)="checkEmail()">
+            <span *ngIf="email.touched && email.invalid">
+              <p *ngIf="email.errors.email">Invalid email address</p>
+              <p *ngIf="email.errors.exist">Account with this email already exist.</p>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="rg-password" class=" form-control-label">Password</label>
+            <input type="password" formControlName="rg-password" placeholder="Enter your password"
+              class="au-input au-input--full">
+            <span *ngIf="password.touched && password.invalid" class="error">
+              <p *ngIf="password.errors.pattern" class="m-0">8 characters with at least 1 Upper Case, 1 lower
+                case,
+                and 1 numeric character</p>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="rg-country" class=" form-control-label">Country</label>
+            <select class="form-control" formControlName="rg-country">
+              <option *ngFor="let item of countries" value="{{item.value}}">{{item.name}}</option>
+            </select>
+            <span *ngIf="country.touched && country.invalid">
+              <p>Pick a country</p>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="rg-city" class=" form-control-label">City</label>
+            <input type="text" formControlName="rg-city" placeholder="Enter your city" class="au-input au-input--full">
+            <span *ngIf="city.touched && city.invalid" class="error">
+              <p *ngIf="city.errors.pattern" class="m-0">Invalid city name</p>
+              <p *ngIf="city.errors.minlength" class="m-0">Minimum two letter</p>
+            </span>
+          </div>
+          <button class="btn btn-lg btn-info btn-block m-b-20" type="submit">register</button>
+        </form>
+        <div class="register-link">
+          <p>
+            Already have account?
+            <a routerLink="/login">Sign In</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loader *ngIf="isLoading">
+</app-loader>

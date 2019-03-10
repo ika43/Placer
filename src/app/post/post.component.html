@@ -1,0 +1,66 @@
+<div class="container mt-3" style="font-family: 'Open Sans', sans-serif;">
+  <div class="row">
+    <div class="col-lg-6 offset-md-3">
+      <div class="card">
+        <div class="card-header">Credit Card</div>
+        <div class="card-body">
+          <div class="card-title">
+            <h3 class="text-center title-2">Pay Invoice</h3>
+          </div>
+          <hr>
+          <form [formGroup]="form" (ngSubmit)="submitInvoice()">
+            <div class="form-group">
+              <label for="cc-payment" class="control-label mb-1">Payment amount</label>
+              <input formControlName="cc-payment" type="text" class="form-control">
+              <div *ngIf="payment.touched && payment.invalid" class="cc-error">
+                <p *ngIf="payment.errors.amount" class="mb-0">Invalid amount format</p>
+              </div>
+            </div>
+            <div class="form-group has-success">
+              <label for="cc-name" class="control-label mb-1">Name on card</label>
+              <input formControlName="cc-name" type="text" class="form-control">
+              <div *ngIf="name.touched && name.invalid" class="cc-error">
+                <p *ngIf="name.errors.ccName" class="mb-0">Invalid name format</p>
+                <p *ngIf="name.errors.minlength" class="mb-0">Min 3 char</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cc-number" class="control-label mb-1">Card number</label>
+              <input formControlName="cc-number" type="tel" class="form-control">
+              <div *ngIf="number.touched && number.invalid" class="cc-error">
+                <p *ngIf="number.errors.ccNumber" class="mb-0">Invalid card number format</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="cc-exp" class="control-label mb-1">Expiration</label>
+                  <input formControlName="cc-exp" type="tel" class="form-control" placeholder="MM / YY">
+                  <div *ngIf="exp.touched && exp.invalid" class="cc-error">
+                    <p *ngIf="exp.errors.ccExp" class="mb-0">Invalid expiration date format</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <label for="x_card_code" class="control-label mb-1">Security code</label>
+                <div class="input-group">
+                  <input formControlName="x_card_code" type="text" class="form-control">
+                </div>
+                <div *ngIf="secCode.touched && secCode.invalid" class="cc-error">
+                  <p *ngIf="secCode.errors.securityCode" class="mb-0">Invalid security code</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                <i class="fa fa-lock fa-lg"></i>&nbsp;
+                <span id="payment-button-amount">Pay</span>
+                <span id="payment-button-sending" style="display:none;">Sending…</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

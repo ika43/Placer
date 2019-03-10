@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  url: "https://m7szy2cmoh.execute-api.us-east-1.amazonaws.com/dev",
+  Milan: "https://res.cloudinary.com/dliiwzbjs/image/upload/v1551639057/cities/guide-to-milan-italy.jpg",
+  Belgrade: "https://res.cloudinary.com/dliiwzbjs/image/upload/v1551638889/cities/shutterstock_526311142.jpg",
+  Paris: "https://res.cloudinary.com/dliiwzbjs/image/upload/v1551639175/cities/a330628091ede7eb1548d6cda58e0357.jpg",
+  Berlin: "https://res.cloudinary.com/dliiwzbjs/image/upload/v1551639097/cities/berlin_fotolia_93887_2306ae4113b62425b112e36-1-1.jpg"
 };
 
 /*
