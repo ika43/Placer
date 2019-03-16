@@ -12,7 +12,8 @@ export class ApartmentComponent implements OnInit {
 
   i = Array;
 
-  @Input() item
+  @Input() item;
+  
 
   ngOnInit() {
   }

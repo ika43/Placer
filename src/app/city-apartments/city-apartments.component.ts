@@ -4,7 +4,8 @@ import { NgRedux } from 'ng2-redux';
 import { IApartmentState } from '../home/store';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, NgForm, FormBuilder, FormArray } from '@angular/forms';
+import { some, sortBy } from 'lodash'
 
 @Component({
   selector: 'app-city-apartments',
@@ -15,9 +16,11 @@ export class CityApartmentsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private ngRedux: NgRedux<IApartmentState>
+    private ngRedux: NgRedux<IApartmentState>,
   ) { }
 
+  p = 1;
+  initialApartments;
   apartments;
   properties;
   currentCity;
@@ -26,7 +29,9 @@ export class CityApartmentsComponent implements OnInit {
   i = Array;
   public start: Date;
   public end: Date;
-  testing
+  lpStar: Boolean = false;
+  lpPrice: Boolean = false;
+  lpReview: Boolean = false;
 
   // * initialize search form
   form = new FormGroup({
@@ -35,21 +40,54 @@ export class CityApartmentsComponent implements OnInit {
     'person': new FormControl()
   })
 
-  //onChange(val) {
-  //  this.apartments.map(a => {
-  //    a.properties.map(p => {
-  //      if (p.name === val) {
-  //        console.log("USAO", p.name)
-  //        this.result.push(a)
-  //      }
-  //    })
-  //  })
-  //}
-
-  submitFilter(val) {
-    console.log(val);
+  sortReview(){
+    this.apartments = sortBy(this.apartments, ['review.length', 'starRate']).reverse()
   }
 
+  priceMin() {
+    if (!this.lpPrice) {
+      this.lpPrice = true;
+      this.apartments = sortBy(this.apartments, ['pricePerNight', 'starRate']).reverse();
+    } else {
+      this.lpPrice = false;
+      this.apartments = sortBy(this.apartments, ['pricePerNight', 'starRate'])
+    }
+  }
+
+  starSort() {
+
+    if (!this.lpStar) {
+      this.lpStar = true;
+      this.apartments = sortBy(this.apartments, ['starRate', 'pricePerNight']).reverse();
+    } else {
+      this.lpStar = false;
+      this.apartments = sortBy(this.apartments, ['starRate', 'pricePerNight'])
+    }
+  }
+
+  submitFilter(val: NgForm) {
+    let checkedProp = [];
+    let lpApartments = [];
+    // * map array for matching
+    for (let [key, value] of Object.entries(val.value)) {
+      if (value) {
+        checkedProp.push(key);
+      }
+    }
+    this.initialApartments.map(a => {
+      let lp = true;
+      checkedProp.map(prop => {
+        if (!some(a.properties, { name: prop })) {
+          lp = false;
+        }
+      })
+      if (lp) {
+        //this.result.push(a);
+        lpApartments.push(a);
+      }
+    })
+    this.apartments = lpApartments;
+  }
 
   // * getter
   get dateRange() {
@@ -81,48 +119,33 @@ export class CityApartmentsComponent implements OnInit {
     Observable.combineLatest([
       this.ngRedux.select('apartmentStore'),
       this.route.paramMap,
-      this.route.queryParamMap,
+      //this.route.queryParamMap,
     ]).subscribe((combined: any) => {
       this.apartments = combined[0].apartments.filter(item => item.address.city === combined[1].get('city'));
+      this.initialApartments = combined[0].apartments.filter(item => item.address.city === combined[1].get('city'));
       this.properties = combined[0].properties;
-      console.log("ika limar pre", this.apartments.length)
+      console.log(this.properties);
 
-      let page = parseInt(combined[2].get('page'))
-
-      // * define array for five apartments
-      this.result = [];
-
-      // * map five apartments
-      for (let i = page; i < (page + 5); i++) {
-
-        if (i === this.apartments.length) break;
-        const element = this.apartments[i];
+      // * calculate avg rate and change description text
+      this.initialApartments.map(a => {
 
         // * decrease description to three sentences
-        let res = element.description.split(".", 3);
-        let description = res[0].concat(".", res[1], ".", res[2], ".");
+        let res = a.description.split(".", 3);
+        let description = res.join(".")
 
         // * put new description
-        element.description = description;
+        a.description = description;
 
         // * calculate average rate
         let sum = 0;
-        Promise.all(
-          element.review.map(r => {
-            sum += +r.rate;
-          })
-        )
+        a.review.map(r => {
+          sum += +r.rate;
+        })
         // * round to one decimal
-        element.avgRate = Math.round(sum / element.review.length);
-        element.starRate = Math.ceil(element.avgRate / 2);
-        this.result.push(element)
-      }
+        a.avgRate = Math.round(sum / a.review.length);
+        a.starRate = Math.ceil(a.avgRate / 2);
+      })
       this.currentCity = combined[1].get('city');
     })
-
-    // * map array for pagination
-    for (let index = 0; index < Math.ceil(this.apartments.length / 5); index++) {
-      this.pages.push(index)
-    }
   }
 }

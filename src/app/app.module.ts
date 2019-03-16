@@ -27,7 +27,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeService } from './home/home.service';
 import { CityApartmentsComponent } from './city-apartments/city-apartments.component';
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { PagerModule } from '@syncfusion/ej2-angular-grids';
+import { CardComponent } from './card/card.component';
+import { CardApartmentComponent } from './card-apartment/card-apartment.component';
 import { ApartmentComponent } from './apartment/apartment.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2CompleterModule } from "ng2-completer";
 
 @NgModule({
   declarations: [
@@ -40,9 +45,11 @@ import { ApartmentComponent } from './apartment/apartment.component';
     RegisterComponent,
     ConfirmcodeComponent,
     LoaderComponent,
+    ApartmentComponent,
     CityApartmentsComponent,
     CityApartmentsComponent,
-    ApartmentComponent
+    CardComponent,
+    CardApartmentComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +60,10 @@ import { ApartmentComponent } from './apartment/apartment.component';
     NgReduxModule,
     BrowserAnimationsModule,
     NgbModule,
-    DateRangePickerModule
+    DateRangePickerModule,
+    PagerModule,
+    NgxPaginationModule,
+    Ng2CompleterModule
   ],
   providers: [
     LoginService,

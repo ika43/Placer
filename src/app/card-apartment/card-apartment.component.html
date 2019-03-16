@@ -1,0 +1,7 @@
+<div class="card">
+  <img class="card-img-top disable-user-select" src="{{ item.img }}" alt="Card image cap" />
+  <div class="card-body">
+    <h4 class="card-title mb-3">{{ item.address.streetName }} {{item.address.streetNumber}}</h4>
+    <span class="card-description">{{ item.description.split('.').slice(0, 2).join('.') }}</span>
+  </div>
+</div>

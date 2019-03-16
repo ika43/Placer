@@ -18,7 +18,6 @@
           <label for="sc-city" class="mb-0 fs-14">Destination/city name:</label>
           <input type="text" formControlName="destination" class="sb-search" />
           <label for="sc-city" class="mb-0 fs-14">Check-in date:</label>
-          <!-- <input type="text" name="cu-date" class="sb-search" /> -->
           <ejs-daterangepicker placeholder='Select a range' formControlName='dateRange'>
           </ejs-daterangepicker>
           <label for="sc-person" class="mb-0 fs-14">Person</label>
@@ -30,34 +29,13 @@
       </div>
       <div class="sb-filter">
         <h4 class="pb-2 display-5">Filter by:</h4>
-
         <p>Properties</p>
-        <form #propForm="ngForm" (submit)="submitFilter(propForm)">
+        <form #srcForm="ngForm" (ngSubmit)="submitFilter(srcForm)">
           <div class="checkbox" *ngFor="let p of properties">
-            <input type="checkbox" name={{p.name}} ([ngModel])="testing"><small class="pl-2">{{p.name}}</small>
+            <input type="checkbox" name={{p.name}} ngModel><small class="pl-2">{{p.name}}</small>
           </div>
-          <input type="submit" value="DOne" />
+          <button button type="button" class="btn btn-warning btn-sm" type="submit">Find</button>
         </form>
-        <hr />
-        <p>Star rating</p>
-        <div class="checkbox">
-          <input type="checkbox" name="" value=""><small class="pl-2">1 star</small>
-        </div>
-        <div class="checkbox">
-          <input type="checkbox" name="" value=""><small class="pl-2">2 star</small>
-        </div>
-        <div class="checkbox">
-          <input type="checkbox" name="" value=""><small class="pl-2">3 star</small>
-        </div>
-        <div class="checkbox">
-          <input type="checkbox" name="" value=""><small class="pl-2">4 star</small>
-        </div>
-        <div class="checkbox">
-          <input type="checkbox" name="" value=""><small class="pl-2">5 star</small>
-        </div>
-        <div class="checkbox">
-          <input type="checkbox" name="" value=""><small class="pl-2">Unrated</small>
-        </div>
       </div>
       <!-- <div class="slidecontainer mt-3">
         <h4 class="pb-2 display-5">Price min</h4>
@@ -72,64 +50,19 @@
       <div class="row">
         <h4>{{currentCity}}: {{apartments.length}} apartments found</h4>
         <div class="ap-header">
-          <button type="button" class="w-25 ap-btn">Our top picks</button>
-          <button type="button" class="w-25 ap-btn">Price(lowest first)</button>
-          <button type="button" class="w-25 ap-btn">Stars</button>
-          <button type="button" class="w-25 ap-btn last-btn">Top reviewed</button>
+          <button type="button" class="w-25 ap-btn disable-user-select">Our top picks</button>
+          <button type="button" class="w-25 ap-btn disable-user-select" (click)="priceMin()">Price <i
+              class="fas fa-sort"></i></button>
+          <button type="button" class="w-25 ap-btn disable-user-select" (click)="starSort()">Stars <i
+              class="fas fa-sort"></i>
+          </button>
+          <button type="button" class="w-25 ap-btn disable-user-select last-btn" (click)="sortReview()">Most reviewed</button>
         </div>
       </div>
-      <app-apartment *ngFor="let apartment of result" [item]='apartment'>
+      <app-apartment *ngFor="let apartment of apartments | paginate: { itemsPerPage: 4, currentPage: p }"
+        [item]='apartment'>
       </app-apartment>
-      <!-- <div class="row mb-2 city-apartment" *ngFor="let apartment of result"> -->
-      <!-- <div class="col-md-3 img-apartment"> -->
-      <!-- <img src="{{apartment.img}}" alt="{{apartment.address.city}}" /> -->
-      <!-- </div> -->
-      <!-- <div class="col-md-5"> -->
-      <!-- <div class="row"> -->
-      <!-- <div class="col-md-12"> -->
-      <!-- <p class="ap-address"><i class="fas fa-map-marker-alt pr-2"></i>{{apartment.address.streetName}} - -->
-      <!-- {{apartment.address.streetNumber}}</p> -->
-      <!-- <span class="fa fa-star checked" *ngFor="let j of i(apartment.starRate)"></span> -->
-      <!-- </div> -->
-      <!-- <div class="ap-description"> -->
-      <!-- {{apartment.description}} -->
-      <!-- </div> -->
-      <!-- </div> -->
-      <!-- </div> -->
-      <!-- <div class="col-md-4 text-right"> -->
-      <!-- <p class="text-rate"> -->
-      <!-- Very good -->
-      <!-- </p> -->
-      <!-- <p class="nm-reviews"> -->
-      <!-- {{apartment.review.length}} reviews -->
-      <!-- </p> -->
-      <!-- <div class="rate-value"> -->
-      <!-- {{apartment.avgRate}} -->
-      <!-- </div> -->
-      <!-- </div> -->
-      <!-- </div> -->
-    </div>
-  </div>
-  <div class="row">
-    <div class="offset-md-9">
-      <nav aria-label="Page navigation example row">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-          <li *ngFor="let page of pages" class="page-item"><a class="page-link"
-              routerLink="/apartments/city/{{currentCity}}" [queryParams]="{page: page*5}">{{page+1}}</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
 </div>

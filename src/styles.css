@@ -12,9 +12,15 @@
     min-height: 100vh;
     flex-direction: column;
   }
-  
+  .src-completer{
+    width: 100%;
+    height: 54px;
+  }
   .Site-content {
     flex: 1;
+  }
+  .has-error{
+    border-color: red;
   }
   .menu-btn{
     color: white;
@@ -113,4 +119,8 @@
   100% {
     transform: rotate(-360deg) translateX(12px);
   }
+  }
+
+  .disable-user-select {
+    user-select: none;
   }
