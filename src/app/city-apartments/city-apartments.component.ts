@@ -113,8 +113,6 @@ export class CityApartmentsComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log("COMPONENT INIT:  CITY_APARTMENT")
-
     // * subscribe to param and query event to get data without init component 
     Observable.combineLatest([
       this.ngRedux.select('apartmentStore'),
@@ -124,7 +122,6 @@ export class CityApartmentsComponent implements OnInit {
       this.apartments = combined[0].apartments.filter(item => item.address.city === combined[1].get('city'));
       this.initialApartments = combined[0].apartments.filter(item => item.address.city === combined[1].get('city'));
       this.properties = combined[0].properties;
-      console.log(this.properties);
 
       // * calculate avg rate and change description text
       this.initialApartments.map(a => {
